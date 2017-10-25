@@ -18,6 +18,11 @@
         public function setLastName($last_name) {
             $this->last_name = $last_name;
         }
+
+        public function prettyPrint()
+        {
+            return "$this->first_name $this->last_name";
+        }
     }
 
 

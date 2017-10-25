@@ -21,7 +21,7 @@
     }
 
     public function getstate() {
-        return $this->$state;
+        return $this->state;
         }
 
     public function setState($state) {
@@ -36,7 +36,11 @@
         $this->zip = $zip;
     }
 
-
+    public function prettyPrint()
+    {
+        return "$this->street <br />
+                 $this->city $this->state $this->zip";
+    }
 }
 
 
