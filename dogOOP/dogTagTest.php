@@ -24,7 +24,23 @@ $tag2->setText(' Rover'.' If found call 678-GET-HELP');
 $houndDog->setNameTag($tag2);
 
 echo $houndDog->getnameTag();
-echo " $<br />" . $houndDog->getBreed();
+echo " <br />" . $houndDog->getBreed();
+
+
+
+// $houndDog->Track();
+// $houndDog->fetch();
+// $houndDog->sayHello();
+// echo "<br />";
+// $houndDog->retrieverSayHello();
+// echo "<br />";
+// $houndDog->protectedWoof();
+echo "<br />";
+$houndDog->fetchDuck();
+
+MammalType::getType();
+echo "<br />";
+Dog::getType();
 
 
 

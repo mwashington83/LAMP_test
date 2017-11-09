@@ -1,8 +1,13 @@
 <?php
 
 require_once "pet.php";
+require_once "retriever.php";
+require_once "mammalType.php";
 
 class Dog extends Pet {
+
+    // use Retriever;
+    use MammalType;
 
     private $breed;
     // private $nameTag;
@@ -15,14 +20,18 @@ class Dog extends Pet {
         return $this->breed;
     }
 
+    // public function sayHello() {
+    //     echo "Hello from Dog";
+    // }
+
     // public function breed()
     // {
     //     echo "I am a $this->breed <br />";
     // }
 
-    public function fetch($breed) {
-        return "Woof";
-    }
+    // public function fetch($breed) {
+    //     return "Woof";
+    // }
 
   
     }
