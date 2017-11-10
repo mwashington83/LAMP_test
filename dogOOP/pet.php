@@ -3,7 +3,7 @@
 
 require_once "nameTag.php";
 
-class Pet {
+abstract class Pet {
 
     private $name;
     private $nameTag;
@@ -16,13 +16,13 @@ class Pet {
         return $this->name;
     }
 
-    public function setNameTag($nameTag) {
-        $this->nameTag = $nameTag;
-    }
+    // public function setNameTag($nameTag) {
+    //     $this->nameTag = $nameTag;
+    // }
 
-    public function getNameTag($nameTag) {
-        return $this->nameTag->getText();
-    }
+    // public function getNameTag($nameTag) {
+    //     return $this->nameTag->getText();
+    // } Commented this out b/c we made Pet abstract and are assigning Name Tags to actual animals that can wear these.
 
     }
 

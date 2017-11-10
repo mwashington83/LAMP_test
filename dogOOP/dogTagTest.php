@@ -28,13 +28,13 @@ echo " <br />" . $houndDog->getBreed();
 
 
 
-// $houndDog->Track();
-// $houndDog->fetch();
-// $houndDog->sayHello();
-// echo "<br />";
-// $houndDog->retrieverSayHello();
-// echo "<br />";
-// $houndDog->protectedWoof();
+$houndDog->Track();
+$houndDog->fetch();
+$houndDog->sayHello();
+echo "<br />";
+$houndDog->retrieverSayHello();
+echo "<br />";
+$houndDog->protectedWoof();
 echo "<br />";
 $houndDog->fetchDuck();
 

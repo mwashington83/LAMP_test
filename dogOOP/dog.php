@@ -3,11 +3,27 @@
 require_once "pet.php";
 require_once "retriever.php";
 require_once "mammalType.php";
+require_once "petInterface.php";
+require_once "nameTagWearingPet.php";
 
-class Dog extends Pet {
+class Dog extends nameTagWearingPet implements INameTagWearable{
+    
+    
+    // private $nameTag;
+    
+    // public function setNameTag($nameTag, $where) {
+    //     $this->nameTag = $nameTag;
+    // }
+
+    // public function getNameTag() {
+    //     return $this->nameTag->getText();
+    // }
+
+    use MammalType;
+    
 
     // use Retriever;
-    use MammalType;
+   
 
     private $breed;
     // private $nameTag;
@@ -19,6 +35,8 @@ class Dog extends Pet {
     public function getBreed() {
         return $this->breed;
     }
+
+
 
     // public function sayHello() {
     //     echo "Hello from Dog";
