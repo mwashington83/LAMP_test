@@ -56,6 +56,27 @@ const UPDATE_QUERY = "UPDATE Contact SET
         
         WHERE idPerson = '%s'";
 
+// const DELETE = "DELETE FROM contact WHERE id = '%s'";
+
+const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
+    `id` int(11) NOT NULL,
+    `firstName` varchar(50) NOT NULL,
+    `lastName` varchar(50) NOT NULL,
+    `email` varchar(100) DEFAULT NULL,
+    `phone` varchar(45) NOT NULL,
+    `notes` varchar(100) DEFAULT NULL,
+    `comments` varchar(100) DEFAULT NULL,
+    `street` varchar(75) DEFAULT NULL,
+    `city` varchar(45) DEFAULT NULL,
+    `state` varchar(45) DEFAULT NULL,
+    `zip` varchar(45) DEFAULT NULL,
+    `type` varchar(45) DEFAULT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"; 
+
+    public function __construct() {
+        $this->createTable();
+    }
+
     private $connection;
 
     public function connectToDatabase () {
@@ -113,7 +134,7 @@ const UPDATE_QUERY = "UPDATE Contact SET
         $contact->setComment($item['comments']);
         $contact->setType($item['type']);
 
-        $contact->setId($item['idPerson']);
+        $contact->setId($item['id']);
 
         $contacts[] = $contact;
 
@@ -165,8 +186,8 @@ const UPDATE_QUERY = "UPDATE Contact SET
                 '".$item->getPerson()->getFirstName()."',
                 '".$item->getPerson()->getLastName()."',
                 '".$item->getEmail()."',
-                '".$item->getPhone_number()."',
-                '".$item->getNotes()."',
+                '".$item->getPhoneNumber()."',
+                '".$item->getNote()."',
                 '".$item->getComment()."',
                 '".$item->getAddress()->getStreet()."',
                 '".$item->getAddress()->getcity()."',
@@ -218,6 +239,17 @@ if(!$result) {
 
 $this->disconnectFromDatabase();
 }
+
+public function createTable() {
+    $this->connectToDatabase();
+    $result = $this->connection->query(self::CREATE_TABLE_QUERY);
+
+    if (!$result) {
+        die($this->connection->error);
+    }
+    
+    $this->disconnectFromDatabase();
+    }
  
 }
 

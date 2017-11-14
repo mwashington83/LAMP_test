@@ -1,7 +1,7 @@
 <?php
 
 class goodDogs {
-$trainabledog = new 
+$trainabledog = new; 
 
 }
 

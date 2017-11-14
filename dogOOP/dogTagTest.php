@@ -10,7 +10,7 @@ $serviceDog->setName('Wilbur');
 $tag = new NameTag();
 $tag->setText('Wilbur'.' If found call 678-GET-HELP');
 
-$serviceDog->setNameTag($tag);
+$serviceDog->setNameTag($tag,'string');
 
 echo $serviceDog->getnameTag();
 echo "$<br />" . $serviceDog->getBreed();
@@ -21,20 +21,20 @@ $houndDog->setName("Rover");
 $tag2 = new NameTag();
 $tag2->setText(' Rover'.' If found call 678-GET-HELP');
 
-$houndDog->setNameTag($tag2);
+$houndDog->setNameTag($tag2, 'neck');
 
 echo $houndDog->getnameTag();
 echo " <br />" . $houndDog->getBreed();
 
 
 
-$houndDog->Track();
+// $houndDog->Track();
 $houndDog->fetch();
 $houndDog->sayHello();
 echo "<br />";
-$houndDog->retrieverSayHello();
+// $houndDog->retrieverSayHello();
 echo "<br />";
-$houndDog->protectedWoof();
+// $houndDog->protectedWoof();
 echo "<br />";
 $houndDog->fetchDuck();
 
