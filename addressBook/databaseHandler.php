@@ -1,6 +1,9 @@
 <?php
 
-// function getConnection() {
+ require_once "abstractDBHandler.php";
+ require_once "databaseConnectionInfo.php";
+ 
+ // function getConnection() {
 //     $host = 'localhost';
 //     $schema = 'addressBook';
 //     $user = 'root';
@@ -16,13 +19,22 @@
 //         return $connection;
 //     }
 
-class databaseHandler{
+class databaseHandler extends abstractDatabaseHandler{
 
-    
-    const DATABASE_HOST ='localhost';
-    const DATABASE_SCHEMA = 'addressBook';
-    const DATABASE_USER = 'developer';
-    const DATABASE_PASSWORD = 'baconbacon';
+    // const DATABASE_HOST ='localhost';
+    // const DATABASE_SCHEMA = 'addressBook';
+    // const DATABASE_USER = 'developer';
+    // const DATABASE_PASSWORD = 'baconbacon';
+
+    public function getDatabaseConnectionInfo () {
+        $databaseConnectionInfo = new databaseConnectionInfo();
+        $databaseConnectionInfo->hostName = 'localhost';
+        $databaseConnectionInfo->schema = 'addressBook';
+        $databaseConnectionInfo->user = 'root';
+        $databaseConnectionInfo->password = '';
+
+        return $databaseConnectionInfo;
+    }
     const READ_QUERY = 'SELECT * FROM Contact';
     const WRITE_QUERY = 'INSERT INTO Contact (
 
@@ -73,34 +85,36 @@ const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
     `type` varchar(45) DEFAULT NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=latin1;"; 
 
+
     public function __construct() {
+        parent::__construct();
         $this->createTable();
     }
 
-    private $connection;
+    // private $connection;
 
-    public function connectToDatabase () {
-        $this->connection = new mysqli (
-            self::DATABASE_HOST,
-            self::DATABASE_USER,
-            self::DATABASE_PASSWORD,
-            self::DATABASE_SCHEMA
-        );
+    // public function connectToDatabase () {
+    //     $this->connection = new mysqli (
+    //         self::DATABASE_HOST,
+    //         self::DATABASE_USER,
+    //         self::DATABASE_PASSWORD,
+    //         self::DATABASE_SCHEMA
+    //     );
 
-        if($this->connection->connect_error){
-            die ($this->connection->connect_error);
-            } 
+    //     if($this->connection->connect_error){
+    //         die ($this->connection->connect_error);
+    //         } 
   
-    }        
+    // }        
 
-    public function disconnectFromDatabase() {
-        $this->connection->close();
-    }
+    // public function disconnectFromDatabase() {
+    //     $this->connection->close();
+    // }
     
     public function readDatabase(){
 
         $contacts = array();
-        $this->connectToDatabase();
+        // $this->connect();
 
         $data = $this->connection->query(self::READ_QUERY);
 
@@ -140,7 +154,7 @@ const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
 
     }
             $data->close();
-            $this->disconnectFromDatabase();
+            // $this->disconnect();
 
             return $contacts;
 }
@@ -178,7 +192,7 @@ const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
     // }
  public function insertItem($item)
  {
-    $this->connectToDatabase();
+    // $this->connectToDatabase();
     
             // foreach($contacts as $item) {
                 $query=self::WRITE_QUERY . 
@@ -205,12 +219,12 @@ const CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS `contact` (
                 die($this->connection->error);
             }
     
-            $this->disconnectFromDatabase();
+            // $this->disconnect();
  }
     
  public function updateItem($item, $idPerson)
  {
-    $this->connectToDatabase();
+    // $this->connect();
 
     $query=sprintf(self::UPDATE_QUERY,
     
@@ -237,20 +251,20 @@ if(!$result) {
     die($this->connection->error);
 }
 
-$this->disconnectFromDatabase();
+// $this->disconnect();
 }
 
 public function createTable() {
-    $this->connectToDatabase();
+    // $this->connect();
     $result = $this->connection->query(self::CREATE_TABLE_QUERY);
 
     if (!$result) {
         die($this->connection->error);
     }
     
-    $this->disconnectFromDatabase();
+    // $this->disconnect();
     }
- 
+
 }
 
 

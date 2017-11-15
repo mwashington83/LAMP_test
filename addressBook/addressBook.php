@@ -1,20 +1,22 @@
 <?php
  require_once ("contact.php");
  require_once ("fileHandler.php");
- require_once ("databaseHandler.php");
+ require_once ("Traits/databaseConnected.php");
 
  class AddressBook {
 
+    use Traits\DatabaseConnected;
+
     private $contacts;
     private $fileHandler;
-    private $databaseHandler;
+    // private $databaseHandler;
 
     public function __construct() {
         
         $this->fileHandler = new FileHandler ("myAddressBook.txt");
         // $this->contacts = $this->fileHandler->readFile();
-        $this->databaseHandler = new DatabaseHandler();
-        $this->contacts = $this->databaseHandler->readDatabase();
+        // $this->databaseHandler = new DatabaseHandler();
+        $this->contacts = $this->getDatabaseHandler()->readDatabase();
         
         }
 
@@ -25,7 +27,7 @@
     public function addContact($contacts){
         $this->contacts[] = $contacts;
         // $this->fileHandler->writeFile($this->contacts);
-        $this->databaseHandler->insertItem($contacts);
+        $this->getDatabaseHandler()->insertItem($contacts);
     }   
 
     public function updateContact ($contact, $id) {
@@ -33,7 +35,7 @@
     //     if($index >= 0) {
     //    $this->contacts[$index] = $new_contact;
     // //    $this->fileHandler->writeFile($this->contacts);
-       $this->databaseHandler->updateItem($contact,$id);
+       $this->getDatabaseHandler()->updateItem($contact,$id);
     //    old_contact->getId()
         }
 
