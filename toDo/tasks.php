@@ -4,10 +4,10 @@
         private $title;
         private $isComplete;
 
-        public function __construct()
-        {
-            $this->title = new Title();
-        }
+        // public function __construct()
+        // {
+        //     $this->title = new Title();
+        // }
 
         public function getId()
         {
@@ -27,8 +27,12 @@
             $this->title = $title;
         }
 
-        public function isComplete() {
+        public function getisComplete() {
             return $this->isComplete;
+            }
+
+            public function setIsComplete($isComplete) {
+                $this->isComplete = $isComplete;
             }
     
         // public function prettyPrint()

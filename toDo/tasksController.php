@@ -1,44 +1,51 @@
 <?php
  require_once ("dbController.php");
- require_once ("fileHandler.php");
- require_once ("Traits/databaseConnected.php");
+ require_once ("tasks.php");
+ //require_once ("Traits/databaseConnected.php");
 
- class AddressBook {
+ class TaskController {
 
-    use Traits\DatabaseConnected;
-
-    private $tasks;
-    // private $fileHandler;
-    // private $databaseHandler;
-
-    public function __construct() {
-        
-        // $this->fileHandler = new FileHandler ("myAddressBook.txt");
-        // $this->contacts = $this->fileHandler->readFile();
-        // $this->databaseHandler = new DatabaseHandler();
-        $this->tasks = $this->getDatabaseHandler()->readDatabase();
-        
-        }
+    // use Traits\DatabaseConnected;
+    private $dbController;
 
     public function getAllTasks() {
-        return $this->tasks;
+        $dbController = new dbController();
+        return $dbControll->readDatabase();
+
+        header("Location: listTasks.php");
+        exit();
     }
 
-    public function createTasks($tasks){
-        $this->tasks[] = $tasks;
-        // $this->fileHandler->writeFile($this->contacts);
-        $this->getDatabaseHandler()->insertItem($tasks);
-    }   
+    public function createTasks($title){
+        $tasks = new Task();
 
-    public function completeTasks ($contact, $id) {
-    //     $index = array_search($old_contact, $this->contacts);
-    //     if($index >= 0) {
-    //    $this->contacts[$index] = $new_contact;
-    // //    $this->fileHandler->writeFile($this->contacts);
-       $this->getDatabaseHandler()->updateItem($contact,$id);
-    //    old_contact->getId()
-        }
+        $task->setTitle ($title);
+        $task->setisComplete (0);
+        $dbController = new dbController();
+        $dbController->insertItem($task);
+
+        echo 'Task created successfully';
+        // $this->fileHandler->writeFile($this->contacts);
+        // $this->getDatabaseHandler()->insertItem($tasks);
+    }  
+} 
+
+    $title = $_POST["title"];
+
+    if(is_set($title)){
+        $taskController = new TaskController();
+        $taskController->createTask($title);
+    }
+    
+
+    // public function completeTasks ($contact, $id) {
+    // //     $index = array_search($old_contact, $this->contacts);
+    // //     if($index >= 0) {
+    // //    $this->contacts[$index] = $new_contact;
+    // // //    $this->fileHandler->writeFile($this->contacts);
+    //    $this->getDatabaseHandler()->updateItem($contact,$id);
+    // //    old_contact->getId()
+    //     }
             
-}
 
  ?>

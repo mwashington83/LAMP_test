@@ -2,11 +2,11 @@
 require_once "tasks.php";
 // Abstract class abstractDatabaseHandler Implements IDatabaseConnectable {
     
-//         protected $connection;
-//         // const DATABASE_HOST ='localhost';
-//         // const DATABASE_SCHEMA = 'addressBook';
-//         // const DATABASE_USER = 'developer';
-//         // const DATABASE_PASSWORD = 'baconbacon';
+        private $connection;
+        const DATABASE_HOST ='localhost';
+        const DATABASE_SCHEMA = 'tasks';
+        const DATABASE_USER = 'developer';
+        const DATABASE_PASSWORD = 'baconbacon';
 //         abstract function getDatabaseConnectionInfo();
 
 class dbController {
@@ -85,7 +85,6 @@ class dbController {
             const READ_QUERY = 'SELECT * FROM tasks';
             const WRITE_QUERY = 'INSERT INTO tasks (
         
-                ID,
                 Title,
                 Complete                
                 )
@@ -155,13 +154,14 @@ class dbController {
                 $data->data_seek($i);
                 $item = $data->fetch_array(MYSQLI_ASSOC);
         
-                $id = new ID();
+                $tasks = new tasks();
+                $tasks->setID($item['id']);
                 $tasks->setTitle($item['tasks']);
                 $person->setComplete($item['complete']);
                 
         
                       
-                $id->setId($item['id']);
+                $tasks[] = $tasks;
         
                 // $contacts[] = $contact;
         
@@ -179,12 +179,11 @@ class dbController {
                 foreach($contacts as $item) {
                     $query=self::WRITE_QUERY . 
                     "(
-                '".$item->getID()."',
-                '".$item->getTitle()."',
-                '".$item->getComplete()."',
-                )";
+                    '".$item->getTitle()."',
+                    '".$item->getComplete()."',
+                     )";
         
-                    echo "<br /> $query";
+                    // echo "<br /> $query";
                 }
         
                 $result = $this->connection->query($query);
@@ -207,7 +206,7 @@ class dbController {
                         '".$item->getComplete()."',
                         )";
             
-                        echo "<br /> $query";
+                        // echo "<br /> $query";
                     }
             
                     $result = $this->connection->query($query);
