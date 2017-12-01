@@ -11,13 +11,13 @@
 <body>
     <div id="createNewTask" class="card">
     <div class="card-body">
-    <form method="post" action="tasksDoCreate.php">
+    <form method="post" action="tasksController.php">
 
     
     <div class="form-group">
     <div class="row">
     <div class="col-4">
-        <input type="text" class="form-control" title="Title" placeholder="Task Title"></input>
+        <input type="text" class="form-control" name="Title" placeholder="Task Title"></input>
         </div>
         </div>
 <!-- 

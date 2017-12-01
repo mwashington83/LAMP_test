@@ -10,42 +10,60 @@
 
     public function getAllTasks() {
         $dbController = new dbController();
-        return $dbControll->readDatabase();
+        return $dbController->readDatabase();
+
+        
+    }
+
+    public function createTasks($title){
+        $tasks = new Tasks();
+        // $mysqldate = date ("Y-m-d H:i:s", time());
+
+        $tasks->setTitle ($title);
+        $tasks->setIsComplete (0);
+        // $tasks->setDateCreated ($mysqldate);
+
+        $dbController = new dbController();
+        $dbController->insertItem($tasks);
+
 
         header("Location: listTasks.php");
         exit();
     }
 
-    public function createTasks($title){
-        $tasks = new Task();
+        
 
-        $task->setTitle ($title);
-        $task->setisComplete (0);
-        $dbController = new dbController();
-        $dbController->insertItem($task);
+        public function completeTask($id) {
+            $task = new Tasks();
+            // $mysqldate = date ("Y-m-d H:i:s", time()); - Figure out how to convert to date from php to mysql
 
-        echo 'Task created successfully';
-        // $this->fileHandler->writeFile($this->contacts);
-        // $this->getDatabaseHandler()->insertItem($tasks);
-    }  
+            $task->setIsComplete (1);
+            // $task->setDateCompleted ($mysqldate);
+
+            $dbController = new dbController();
+            $dbController->updateItem($task, $id);
+
+            header("Location: listTasks.php");
+            exit();
+            
+        }
+     
 } 
 
-    $title = $_POST["title"];
+    
 
-    if(is_set($title)){
+    if(isset($_POST["Title"])){
+        $title = $_POST["Title"];
         $taskController = new TaskController();
-        $taskController->createTask($title);
+        $taskController->createTasks($title);
     }
     
 
-    // public function completeTasks ($contact, $id) {
-    // //     $index = array_search($old_contact, $this->contacts);
-    // //     if($index >= 0) {
-    // //    $this->contacts[$index] = $new_contact;
-    // // //    $this->fileHandler->writeFile($this->contacts);
-    //    $this->getDatabaseHandler()->updateItem($contact,$id);
-    // //    old_contact->getId()
-    //     }
-            
+    if(isset($_POST["taskId"])){
+        $taskID = $_POST["taskId"];
+        $taskController = new TaskController();
+        $taskController->completeTask($taskID);
+    }
+        
 
  ?>

@@ -12,45 +12,60 @@
 
 <body>
     <div id="container">
-    <div class="card" style="width: 40rem;">
+    <div class="card" style="width: 60rem;">
       <div class="card-header">
         <form action="tasksCreate.php">
           <!-- <span class="input-group-addon"><i class="fa fa-plus"></i></span> -->
             <input class="btn btn-outline-success btn-lg" " type="submit" value="create" />
-            
+
+          </form>    
         </div>        
-        </form>
+        
 
         <div class="card-body">
+       
         
 <?php
 require_once "tasksController.php";
-$tasksController = new tasksController();
-$all_tasks = $tasksController->getAlltasksController();
+$TaskController = new TaskController();
+$all_tasks = $TaskController->getAllTasks();
 
-echo '<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Is Completed</th>
-       </tr>
-  </thead>
-  <tbody>';
+echo '<ul class="list-group">
 
-foreach ($all_tasks as $tasks) {
+<li class="list-group-item">
+<div class="row">
+  
+      <div class="col-sm">#</div>
+      <div class="col-sm">Title</div>
+      <div class="col-sm">Is Complete</div>
+      <!-- <div class="col-sm">Date Created</div>
+      <div class="col-sm">Date Completed</div> -->
+      <div class="col-sm"></div>
+       
+  </div>
+  </li>';
+
+foreach ($all_tasks as $task) {
+
+$class = $task->getIsComplete() ?
+'style="text-decoration: line-through"' :
+'';
+$button = !$task->getIsComplete() ?
+'<button type="submit" class="btn btn-primary">Complete</button>' :
+'';
 
   echo '
-    <tr>
-      <th scope="row">' .$task->getID() . '</th>
-      <td>' . $task->getTitle() . '</td>
-      <td>' . $task->getisComplete() . '</td>
-      </tr>;
-    }
-    echo '</tbody>
-        </table>';
-}
-
+    <li class="list-group-item">
+    <form method = "post" action = "tasksController.php" name = "createForm' . $task->getId() .'">
+    <input type="hidden" name="taskId" value=' . $task->getId() . '>
+    <div class="row">'
+    . '<div class="col-sm">' . $task->getId() . '</div>'
+    . '<div class="col-sm" ' . $class . '>' . $task->getTitle() . '</div>'
+    . '<div class="col-sm">' . $task->getIsComplete() . '</div>'
+    . '<div class="col-sm">' . $button . '</div></div></form></li>';
+      }
+    
+        echo '</ul>';
 ?>
     
     </div>
@@ -58,4 +73,7 @@ foreach ($all_tasks as $tasks) {
     </div>
 </body>
 </html>
+
+<!-- . '<div class="col-sm">'. $task->getDateCreated() . '</div> '
+    . '<div class="col-sm">'. $task->getDateCompleted() . '</div>' -->
 
